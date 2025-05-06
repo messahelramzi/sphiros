@@ -1,0 +1,39 @@
+# Project Configuration
+PROJECT_NAME        = "SPHiros"
+PROJECT_NUMBER      = 0.1
+PROJECT_BRIEF       = "SPHiros: A portable (CPU-GPU) high-performance MPI+Kokkos SPH hydrocode."
+
+# Input and Exclusion
+INPUT               = src tests
+EXCLUDE             = build-*
+FILE_PATTERNS       = *.cpp *.hpp *.h
+RECURSIVE           = YES
+
+# Output Settings
+OUTPUT_DIRECTORY    = docs
+
+# Documentation Features
+GENERATE_HTML       = YES
+GENERATE_TREEVIEW   = YES
+SOURCE_BROWSER      = YES
+SEARCHENGINE        = YES
+EXTRACT_PRIVATE     = YES
+
+# Encoding
+INPUT_ENCODING      = UTF-8
+DEFAULT_LANGUAGE    = English
+
+# Graphs and Diagrams
+CALL_GRAPH          = YES
+COLLABORATION_GRAPH = YES
+MAX_DOT_GRAPH_DEPTH = 3
+#HAVE_DOT           = YES
+#DOT_PATH           = /usr/bin/dot
+#DOT_GRAPH_MAX_NODES = 1000
+#DOT_IMAGE_FORMAT   = png
+
+# Optional Outputs
+#HTML_LOGO          = logo.png
+#GENERATE_PDF       = NO
+#GENERATE_LATEX     = NO
+#LATEX_OUTPUT_DIRECTORY = latex

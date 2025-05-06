@@ -1,0 +1,43 @@
+{
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "Release",
+            "description": "Release configuration using Spack environment",
+            "binaryDir": "${sourceDir}/build-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_STANDARD": "20",
+                "CMAKE_CXX_COMPILER": "mpicxx",
+                "CMAKE_CXX_EXTENSIONS": "OFF",
+                "CMAKE_PREFIX_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "ON"
+            },
+            "environment": {
+                "SPACK_ENV_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view",
+                "CUDA_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view",
+                "PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/bin:$penv{PATH}",
+                "LD_LIBRARY_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/lib/hpctoolkit:/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/lib"
+            }
+        },
+        {
+            "name": "RelWithDebInfo",
+            "description": "RelWithDebInfo configuration using Spack environment",
+            "binaryDir": "${sourceDir}/build-relwithdebinfo",
+            "inherits": "Release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "Debug",
+            "description": "Debug configuration using Spack environment",
+            "binaryDir": "${sourceDir}/build-debug",
+            "inherits": "Release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ]
+}

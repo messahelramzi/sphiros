@@ -1,0 +1,35 @@
+spack:
+  view: /opt/view
+  specs:
+  - openmpi@5.0.8 
+  - spdlog 
+  - yaml-cpp 
+  - cli11 
+  - cmake 
+  - ninja 
+  - doxygen 
+  - boost +chrono +iostreams +serialization +system +timer +date_time +signals +math +mpi +random 
+  - kokkos cxxstd=20 +compiler_warnings +debug_bounds_check +debug_dualview_modify_check +hwloc +numactl +openmp +tuning 
+  - kokkos-kernels +openmp 
+  - kokkos-tools +mpi +papi 
+  - arborx cxxstd=20 +openmp +mpi
+  - googletest cxxstd=20
+  - lcov
+
+  config:
+    install_tree:
+      root: /opt/spack
+      padded_length: 128
+
+  packages:
+    all:
+      require: 'target=x86_64_v3'
+
+  mirrors:
+   sphiros-ci-buildcache-linux:
+      url: oci://ghcr.io/messahelramzi/sphiros-ci-buildcache-linux:latest
+      binary: true
+      signed: false
+      access_pair:
+        id_variable: GITHUB_USER
+        secret_variable: GITHUB_TOKEN

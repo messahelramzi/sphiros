@@ -1,0 +1,27 @@
+mesh: "mesh.vtk"
+eos:
+  - type: ["EOSIdealGas", "EOSIdealGas"]
+    eos_id: [0, 1]
+    gamma: [1.4, 1.4]
+    pcutoff: [1e-6, 1.e-6]
+  - type: ["EOSStiffenedGas"]
+    eos_id: [2]
+    gamma: [1.4]
+    pcutoff: [1e-6]
+    pinf: [0.0]
+part:
+  - type: "SPHPart"
+    part_id: 0
+    eos_id: 0
+  - type: "SPHPart"
+    part_id: 1
+    eos_id: 1
+  - type: "SPHPart"
+    part_id: 2
+    eos_id: 2
+solver:
+  - type: "SPHEuler"
+  - scheme: "NumberDensdity"
+time_integration:
+  - cfl: 0.5
+  - end_time: 10.0

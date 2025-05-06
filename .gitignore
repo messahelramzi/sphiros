@@ -1,0 +1,54 @@
+# Exclude all build directories with "build-" prefix
+build-*/
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Compiled object files and binaries
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.out
+*.a
+*.lib
+
+# Generated documentation
+docs/
+
+# Dependency directories
+.external/
+.externalNativeBuild/
+
+# Python cache (if applicable)
+__pycache__/
+*.pyc
+*.pyo
+
+# Spack environment files
+spack.lock
+
+# Coverage-related files
+*.gcno
+*.gcda
+*.info
+coverage-report/
+build/
+
+# CMakePresets
+CMakePresets.json
