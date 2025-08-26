@@ -1,0 +1,159 @@
+\doxysection{EOSLinear\+Gas Class Reference}
+\hypertarget{classEOSLinearGas}{}\label{classEOSLinearGas}\index{EOSLinearGas@{EOSLinearGas}}
+
+
+Implements the linear gas equation of state.  
+
+
+
+
+{\ttfamily \#include $<$eos\+\_\+linear\+\_\+gas.\+hpp$>$}
+
+Inheritance diagram for EOSLinear\+Gas\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classEOSLinearGas}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEOSLinearGas_acb7e9c7cf8ec19bfe2951619b0e14615}{EOSLinear\+Gas}} (int id, double gamma, double pcutoff)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classEOSLinearGas}{EOSLinear\+Gas}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEOSLinearGas_a88712d906d7c008cc43435249f3a819f}{Pressure\+So\+SImpl}} (Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ rho, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ eint, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ p, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ sos) const
+\begin{DoxyCompactList}\small\item\em Computes pressure and speed of sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEOSCRTP}{EOSCRTP$<$ EOSLinear\+Gas $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEOSLinearGas}{EOSLinear\+Gas}} \& \mbox{\hyperlink{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e}{self}} ()
+\begin{DoxyCompactList}\small\item\em Returns a reference to the derived class. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classEOSLinearGas}{EOSLinear\+Gas}} \& \mbox{\hyperlink{classEOSCRTP_ac74c04f955c168f50e6672945e60fe4f}{self}} () const
+\begin{DoxyCompactList}\small\item\em Returns a constant reference to the derived class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEOSCRTP_a01404155fd306e213101a8083b4fbca9}{Pressure\+SoS}} () const
+\begin{DoxyCompactList}\small\item\em Calls the derived class\textquotesingle{}s implementation of Pressure\+SoS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classEOSLinearGas_ae630fd3126c0f33d2a581269ac99d682}{m\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Unique identifier for the EOS. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEOSLinearGas_a229553ff4589b96d66c8be6fef0a6ecc}{m\+\_\+gamma}}
+\begin{DoxyCompactList}\small\item\em Specific heat ratio (γ). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEOSLinearGas_a0ccabd11f86dbc61907c1eb01ded704d}{m\+\_\+pcutoff}}
+\begin{DoxyCompactList}\small\item\em Minimum cutoff pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements the linear gas equation of state. 
+
+The {\ttfamily \doxylink{classEOSLinearGas}{EOSLinear\+Gas}} class computes pressure and speed of sound for a linear gas model. It inherits from the {\ttfamily \doxylink{classEOSCRTP}{EOSCRTP}} base class and provides the implementation for the {\ttfamily Pressure\+So\+SImpl} method. 
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00020}{20}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classEOSLinearGas_acb7e9c7cf8ec19bfe2951619b0e14615}\index{EOSLinearGas@{EOSLinearGas}!EOSLinearGas@{EOSLinearGas}}
+\index{EOSLinearGas@{EOSLinearGas}!EOSLinearGas@{EOSLinearGas}}
+\doxysubsubsection{\texorpdfstring{EOSLinearGas()}{EOSLinearGas()}}
+{\footnotesize\ttfamily \label{classEOSLinearGas_acb7e9c7cf8ec19bfe2951619b0e14615} 
+EOSLinear\+Gas\+::\+EOSLinear\+Gas (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{double}]{gamma}{, }\item[{double}]{pcutoff}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{classEOSLinearGas}{EOSLinear\+Gas}. 
+
+Initializes the EOS id, specific heat ratio ({\ttfamily gamma}) and the minimum cutoff pressure ({\ttfamily pcutoff}).
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & EOS id. \\
+\hline
+{\em gamma} & Specific heat ratio (e.\+g., 1.\+4 for air). \\
+\hline
+{\em pcutoff} & Minimum cutoff pressure to avoid negative or unphysical values (e.\+g. cavitation). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00033}{33}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classEOSLinearGas_a88712d906d7c008cc43435249f3a819f}\index{EOSLinearGas@{EOSLinearGas}!PressureSoSImpl@{PressureSoSImpl}}
+\index{PressureSoSImpl@{PressureSoSImpl}!EOSLinearGas@{EOSLinearGas}}
+\doxysubsubsection{\texorpdfstring{PressureSoSImpl()}{PressureSoSImpl()}}
+{\footnotesize\ttfamily \label{classEOSLinearGas_a88712d906d7c008cc43435249f3a819f} 
+void EOSLinear\+Gas\+::\+Pressure\+So\+SImpl (\begin{DoxyParamCaption}\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{rho}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{eint}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{p}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{sos}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes pressure and speed of sound. 
+
+This method computes the pressure and speed of sound for a linear gas model based on the given density, internal energy and EOS-\/specific parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rho} & Density Kokkos (sub)view. \\
+\hline
+{\em eint} & Internal energy Kokkos (sub)view. \\
+\hline
+{\em p} & Pressure Kokkos (sub)view (output). \\
+\hline
+{\em sos} & Speed of sound Kokkos (sub)view (output). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00048}{48}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classEOSLinearGas_a229553ff4589b96d66c8be6fef0a6ecc}\index{EOSLinearGas@{EOSLinearGas}!m\_gamma@{m\_gamma}}
+\index{m\_gamma@{m\_gamma}!EOSLinearGas@{EOSLinearGas}}
+\doxysubsubsection{\texorpdfstring{m\_gamma}{m\_gamma}}
+{\footnotesize\ttfamily \label{classEOSLinearGas_a229553ff4589b96d66c8be6fef0a6ecc} 
+double EOSLinear\+Gas\+::m\+\_\+gamma\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Specific heat ratio (γ). 
+
+This member variable represents the specific heat ratio, also known as the adiabatic index. It is a dimensionless quantity that characterizes the thermodynamic properties of the gas. For example, for air, γ is typically 1.\+4. 
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00077}{77}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+\Hypertarget{classEOSLinearGas_ae630fd3126c0f33d2a581269ac99d682}\index{EOSLinearGas@{EOSLinearGas}!m\_id@{m\_id}}
+\index{m\_id@{m\_id}!EOSLinearGas@{EOSLinearGas}}
+\doxysubsubsection{\texorpdfstring{m\_id}{m\_id}}
+{\footnotesize\ttfamily \label{classEOSLinearGas_ae630fd3126c0f33d2a581269ac99d682} 
+int EOSLinear\+Gas\+::m\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Unique identifier for the EOS. 
+
+This member variable stores a unique integer identifier for the equation of state (EOS). It is used to distinguish between different EOS implementations. 
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00068}{68}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+\Hypertarget{classEOSLinearGas_a0ccabd11f86dbc61907c1eb01ded704d}\index{EOSLinearGas@{EOSLinearGas}!m\_pcutoff@{m\_pcutoff}}
+\index{m\_pcutoff@{m\_pcutoff}!EOSLinearGas@{EOSLinearGas}}
+\doxysubsubsection{\texorpdfstring{m\_pcutoff}{m\_pcutoff}}
+{\footnotesize\ttfamily \label{classEOSLinearGas_a0ccabd11f86dbc61907c1eb01ded704d} 
+double EOSLinear\+Gas\+::m\+\_\+pcutoff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Minimum cutoff pressure. 
+
+This member variable defines the minimum allowable pressure value to avoid negative or unphysical results, such as cavitation. It ensures numerical stability in the computations. 
+
+Definition at line \mbox{\hyperlink{eos__linear__gas_8hpp_source_l00085}{85}} of file \mbox{\hyperlink{eos__linear__gas_8hpp_source}{eos\+\_\+linear\+\_\+gas.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/eos/\mbox{\hyperlink{eos__linear__gas_8hpp}{eos\+\_\+linear\+\_\+gas.\+hpp}}\end{DoxyCompactItemize}

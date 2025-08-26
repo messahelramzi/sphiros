@@ -1,0 +1,177 @@
+\doxysection{EOSStiffened\+Gas Class Reference}
+\hypertarget{classEOSStiffenedGas}{}\label{classEOSStiffenedGas}\index{EOSStiffenedGas@{EOSStiffenedGas}}
+
+
+Implements the stiffened gas equation of state.  
+
+
+
+
+{\ttfamily \#include $<$eos\+\_\+stiffened\+\_\+gas.\+hpp$>$}
+
+Inheritance diagram for EOSStiffened\+Gas\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classEOSStiffenedGas}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc}{EOSStiffened\+Gas}} (int id, double gamma, double pcutoff, double pinf=0.\+0)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classEOSStiffenedGas}{EOSStiffened\+Gas}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEOSStiffenedGas_a6826e9fba970c7e35fc2a818e46cbb74}{Pressure\+So\+SImpl}} (Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ rho, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ eint, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ p, Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$ sos) const
+\begin{DoxyCompactList}\small\item\em Computes pressure and speed of sound. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEOSCRTP}{EOSCRTP$<$ EOSStiffened\+Gas $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEOSStiffenedGas}{EOSStiffened\+Gas}} \& \mbox{\hyperlink{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e}{self}} ()
+\begin{DoxyCompactList}\small\item\em Returns a reference to the derived class. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classEOSStiffenedGas}{EOSStiffened\+Gas}} \& \mbox{\hyperlink{classEOSCRTP_ac74c04f955c168f50e6672945e60fe4f}{self}} () const
+\begin{DoxyCompactList}\small\item\em Returns a constant reference to the derived class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEOSCRTP_a01404155fd306e213101a8083b4fbca9}{Pressure\+SoS}} () const
+\begin{DoxyCompactList}\small\item\em Calls the derived class\textquotesingle{}s implementation of Pressure\+SoS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d}{m\+\_\+id}}
+\begin{DoxyCompactList}\small\item\em Unique identifier for the EOS. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\+\_\+gamma}}
+\begin{DoxyCompactList}\small\item\em Specific heat ratio (γ). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}{m\+\_\+pcutoff}}
+\begin{DoxyCompactList}\small\item\em Minimum cutoff pressure. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{m\+\_\+pinf}}
+\begin{DoxyCompactList}\small\item\em Infinite pressure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implements the stiffened gas equation of state. 
+
+The {\ttfamily \doxylink{classEOSStiffenedGas}{EOSStiffened\+Gas}} class computes pressure and speed of sound for a stiffened gas model. It inherits from the {\ttfamily \doxylink{classEOSCRTP}{EOSCRTP}} base class and provides the implementation for the {\ttfamily Pressure\+So\+SImpl} method. 
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00021}{21}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc}\index{EOSStiffenedGas@{EOSStiffenedGas}!EOSStiffenedGas@{EOSStiffenedGas}}
+\index{EOSStiffenedGas@{EOSStiffenedGas}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{EOSStiffenedGas()}{EOSStiffenedGas()}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc} 
+EOSStiffened\+Gas\+::\+EOSStiffened\+Gas (\begin{DoxyParamCaption}\item[{int}]{id}{, }\item[{double}]{gamma}{, }\item[{double}]{pcutoff}{, }\item[{double}]{pinf}{ = {\ttfamily 0.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{classEOSStiffenedGas}{EOSStiffened\+Gas}. 
+
+Initializes the EOS id, specific heat ratio ({\ttfamily gamma}), the minimum cutoff pressure ({\ttfamily pcutoff}) and the infinite pressure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & EOS id. \\
+\hline
+{\em gamma} & Specific heat ratio (e.\+g., 1.\+4 for air). \\
+\hline
+{\em pcutoff} & Minimum cutoff pressure to avoid negative or unphysical values (e.\+g. cavitation). \\
+\hline
+{\em pinf} & Infinite pressure. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00035}{35}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classEOSStiffenedGas_a6826e9fba970c7e35fc2a818e46cbb74}\index{EOSStiffenedGas@{EOSStiffenedGas}!PressureSoSImpl@{PressureSoSImpl}}
+\index{PressureSoSImpl@{PressureSoSImpl}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{PressureSoSImpl()}{PressureSoSImpl()}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_a6826e9fba970c7e35fc2a818e46cbb74} 
+void EOSStiffened\+Gas\+::\+Pressure\+So\+SImpl (\begin{DoxyParamCaption}\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{rho}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{eint}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{p}{, }\item[{Kokkos\+::\+View$<$ double \texorpdfstring{$\ast$}{*} $>$}]{sos}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes pressure and speed of sound. 
+
+This method computes the pressure and speed of sound for a stiffened gas model based on the given density, internal energy and EOS-\/specific parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rho} & Density Kokkos (sub)view. \\
+\hline
+{\em eint} & Internal energy Kokkos (sub)view. \\
+\hline
+{\em p} & Pressure Kokkos (sub)view (output). \\
+\hline
+{\em sos} & Speed of sound Kokkos (sub)view (output). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00050}{50}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}\index{EOSStiffenedGas@{EOSStiffenedGas}!m\_gamma@{m\_gamma}}
+\index{m\_gamma@{m\_gamma}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{m\_gamma}{m\_gamma}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693} 
+double EOSStiffened\+Gas\+::m\+\_\+gamma\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Specific heat ratio (γ). 
+
+This member variable represents the specific heat ratio, also known as the adiabatic index. It is a dimensionless quantity that characterizes the thermodynamic properties of the gas. For example, for air, γ is typically 1.\+4. 
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00080}{80}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+\Hypertarget{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d}\index{EOSStiffenedGas@{EOSStiffenedGas}!m\_id@{m\_id}}
+\index{m\_id@{m\_id}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{m\_id}{m\_id}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d} 
+int EOSStiffened\+Gas\+::m\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Unique identifier for the EOS. 
+
+This member variable stores a unique integer identifier for the equation of state (EOS). It is used to distinguish between different EOS implementations. 
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00071}{71}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+\Hypertarget{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}\index{EOSStiffenedGas@{EOSStiffenedGas}!m\_pcutoff@{m\_pcutoff}}
+\index{m\_pcutoff@{m\_pcutoff}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{m\_pcutoff}{m\_pcutoff}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57} 
+double EOSStiffened\+Gas\+::m\+\_\+pcutoff\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Minimum cutoff pressure. 
+
+This member variable defines the minimum allowable pressure value to avoid negative or unphysical results, such as cavitation. It ensures numerical stability in the computations. 
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00088}{88}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+\Hypertarget{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}\index{EOSStiffenedGas@{EOSStiffenedGas}!m\_pinf@{m\_pinf}}
+\index{m\_pinf@{m\_pinf}!EOSStiffenedGas@{EOSStiffenedGas}}
+\doxysubsubsection{\texorpdfstring{m\_pinf}{m\_pinf}}
+{\footnotesize\ttfamily \label{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe} 
+double EOSStiffened\+Gas\+::m\+\_\+pinf\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Infinite pressure. 
+
+
+
+Definition at line \mbox{\hyperlink{eos__stiffened__gas_8hpp_source_l00092}{92}} of file \mbox{\hyperlink{eos__stiffened__gas_8hpp_source}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/eos/\mbox{\hyperlink{eos__stiffened__gas_8hpp}{eos\+\_\+stiffened\+\_\+gas.\+hpp}}\end{DoxyCompactItemize}

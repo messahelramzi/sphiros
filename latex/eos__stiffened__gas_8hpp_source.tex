@@ -1,0 +1,33 @@
+\doxysection{eos\+\_\+stiffened\+\_\+gas.\+hpp}
+\hypertarget{eos__stiffened__gas_8hpp_source}{}\label{eos__stiffened__gas_8hpp_source}\index{src/eos/eos\_stiffened\_gas.hpp@{src/eos/eos\_stiffened\_gas.hpp}}
+\mbox{\hyperlink{eos__stiffened__gas_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{eos__crtp_8hpp}{eos\_crtp.hpp}}"{}}}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00021}\mbox{\hyperlink{classEOSStiffenedGas}{00021}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc}{EOSStiffenedGas}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classEOSCRTP}{EOSCRTP}}<EOSStiffenedGas>\ \{}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00022}00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00035}\mbox{\hyperlink{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc}{00035}}\ \ \ \ \ \mbox{\hyperlink{classEOSStiffenedGas_a2a6f22be720d534150b1216e6c3900cc}{EOSStiffenedGas}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{double}\ gamma,\ \textcolor{keywordtype}{double}\ pcutoff,\ \textcolor{keywordtype}{double}\ pinf\ =\ 0.0)}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00036}00036\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d}{m\_id}}(id),\ \mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\_gamma}}(gamma),\ \mbox{\hyperlink{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}{m\_pcutoff}}(pcutoff),\ \mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{m\_pinf}}(pinf)\ \{\}}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00050}\mbox{\hyperlink{classEOSStiffenedGas_a6826e9fba970c7e35fc2a818e46cbb74}{00050}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEOSStiffenedGas_a6826e9fba970c7e35fc2a818e46cbb74}{PressureSoSImpl}}(Kokkos::View<double\ *>\ rho,}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::View<double\ *>\ eint,\ Kokkos::View<double\ *>\ p,}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::View<double\ *>\ sos)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ N\ =\ rho.extent(0);}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00054}00054\ \ \ \ \ \ \ \ \ Kokkos::parallel\_for(}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Initialize"{}},\ N,\ KOKKOS\_CLASS\_LAMBDA(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ i)\ \{}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p(i)\ =\ Kokkos::max(}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\_gamma}}\ -\/\ 1.0)\ *\ rho(i)\ *\ eint(i)\ -\/\ \mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\_gamma}}\ *\ \mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{m\_pinf}},}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}{m\_pcutoff}});}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sos(i)\ =\ \mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\_gamma}}\ *\ (p(i)\ +\ \mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{m\_pinf}})\ /\ rho(i);}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00063}00063\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00071}\mbox{\hyperlink{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d}{00071}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEOSStiffenedGas_a33cad24bc54777de4aab86e4879a806d}{m\_id}};}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00080}\mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{00080}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classEOSStiffenedGas_a1fc16640c2a7387488c99565d6620693}{m\_gamma}};}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00088}\mbox{\hyperlink{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}{00088}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classEOSStiffenedGas_aa0693b0b935ed022a1aa39167a2b1a57}{m\_pcutoff}};}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00092}\mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{00092}}\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classEOSStiffenedGas_aca66639b038333d5dcc2da3ec04d04fe}{m\_pinf}};\ \ \textcolor{comment}{//\ Infinitesimal\ pressure}}
+\DoxyCodeLine{\Hypertarget{eos__stiffened__gas_8hpp_source_l00093}00093\ \};}
+
+\end{DoxyCode}
