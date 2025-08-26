@@ -1,0 +1,94 @@
+\doxysection{EOSCRTP\texorpdfstring{$<$}{<} Derived \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classEOSCRTP}{}\label{classEOSCRTP}\index{EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}}
+
+
+Base class for equation of state (EOS) implementations using CRTP.  
+
+
+
+
+{\ttfamily \#include $<$eos\+\_\+crtp.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Derived \& \mbox{\hyperlink{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e}{self}} ()
+\begin{DoxyCompactList}\small\item\em Returns a reference to the derived class. \end{DoxyCompactList}\item 
+const Derived \& \mbox{\hyperlink{classEOSCRTP_ac74c04f955c168f50e6672945e60fe4f}{self}} () const
+\begin{DoxyCompactList}\small\item\em Returns a constant reference to the derived class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEOSCRTP_a01404155fd306e213101a8083b4fbca9}{Pressure\+SoS}} () const
+\begin{DoxyCompactList}\small\item\em Calls the derived class\textquotesingle{}s implementation of Pressure\+SoS. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Derived$>$\newline
+class EOSCRTP$<$ Derived $>$}
+Base class for equation of state (EOS) implementations using CRTP. 
+
+The {\ttfamily \doxylink{classEOSCRTP}{EOSCRTP}} class template provides a common interface for EOS implementations. Derived classes must implement the {\ttfamily Pressure\+So\+SImpl} method, which computes pressure and speed of sound based on density, internal energy and EOS-\/specific parameters. 
+
+Definition at line \mbox{\hyperlink{eos__crtp_8hpp_source_l00031}{31}} of file \mbox{\hyperlink{eos__crtp_8hpp_source}{eos\+\_\+crtp.\+hpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classEOSCRTP_a01404155fd306e213101a8083b4fbca9}\index{EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}!PressureSoS@{PressureSoS}}
+\index{PressureSoS@{PressureSoS}!EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{PressureSoS()}{PressureSoS()}}
+{\footnotesize\ttfamily \label{classEOSCRTP_a01404155fd306e213101a8083b4fbca9} 
+template$<$typename Derived$>$ \\
+void \mbox{\hyperlink{classEOSCRTP}{EOSCRTP}}$<$ Derived $>$\+::\+Pressure\+SoS (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calls the derived class\textquotesingle{}s implementation of Pressure\+SoS. 
+
+This function casts the current object to the derived type and calls the derived class\textquotesingle{}s {\ttfamily Pressure\+So\+SImpl} function with default-\/initialized Kokkos views. It is intended to be used in the CRTP pattern for static polymorphism. 
+
+Definition at line \mbox{\hyperlink{eos__crtp_8hpp_source_l00058}{58}} of file \mbox{\hyperlink{eos__crtp_8hpp_source}{eos\+\_\+crtp.\+hpp}}.
+
+\Hypertarget{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e}\index{EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}!self@{self}}
+\index{self@{self}!EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{self()}{self()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e} 
+template$<$typename Derived$>$ \\
+Derived \& \mbox{\hyperlink{classEOSCRTP}{EOSCRTP}}$<$ Derived $>$\+::self (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a reference to the derived class. 
+
+This function is used in the Curiously Recurring Template Pattern (CRTP) to safely cast the base class pointer or reference to the derived type.
+
+\begin{DoxyReturn}{Returns}
+Reference to the derived class. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{eos__crtp_8hpp_source_l00041}{41}} of file \mbox{\hyperlink{eos__crtp_8hpp_source}{eos\+\_\+crtp.\+hpp}}.
+
+\Hypertarget{classEOSCRTP_ac74c04f955c168f50e6672945e60fe4f}\index{EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}!self@{self}}
+\index{self@{self}!EOSCRTP$<$ Derived $>$@{EOSCRTP$<$ Derived $>$}}
+\doxysubsubsection{\texorpdfstring{self()}{self()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classEOSCRTP_ac74c04f955c168f50e6672945e60fe4f} 
+template$<$typename Derived$>$ \\
+const Derived \& \mbox{\hyperlink{classEOSCRTP}{EOSCRTP}}$<$ Derived $>$\+::self (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a constant reference to the derived class. 
+
+Const version of \doxylink{classEOSCRTP_a38ce3091d77f5f30fd4154e4ee99dc3e}{self()}, used in const-\/qualified member functions.
+
+\begin{DoxyReturn}{Returns}
+Const reference to the derived class. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{eos__crtp_8hpp_source_l00049}{49}} of file \mbox{\hyperlink{eos__crtp_8hpp_source}{eos\+\_\+crtp.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/eos/\mbox{\hyperlink{eos__crtp_8hpp}{eos\+\_\+crtp.\+hpp}}\end{DoxyCompactItemize}
