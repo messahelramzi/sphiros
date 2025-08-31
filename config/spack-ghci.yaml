@@ -14,7 +14,7 @@ spack:
   - kokkos-tools +mpi +papi 
   - arborx cxxstd=20 +openmp +mpi
   - googletest cxxstd=20
-  - lcov
+  - lcov@2.0
   - python
   - py-pybind11
   - py-meshio
