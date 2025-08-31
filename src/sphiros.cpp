@@ -23,6 +23,8 @@
 // eos includes (test-only)
 #include "eos_linear_gas.hpp"
 #include "eos_stiffened_gas.hpp"
+// io includes (test-only)
+#include "pymeshio_wrapper.hpp"
 
 /**
  * @brief Main function for the SPHiros application.
@@ -114,6 +116,54 @@ int main(int argc, char** argv) {
                 },
                 eos);
         }
+    }
+
+    // Read the mesh using meshio (if specified)
+    std::filesystem::path yaml_path(input_file);
+    std::string yaml_folder = yaml_path.parent_path().string();
+
+    YAML::Node config = YAML::LoadFile(input_file);
+
+    std::string mesh_file = yaml_folder + "/";
+    if (config["mesh"]) {
+        auto mesh_prefix = config["mesh"].as<std::string>();
+        mesh_file += mesh_prefix + "/" + mesh_prefix + "_" +
+                     std::to_string(world_rank) + ".vtu";
+    } else {
+        if (world_rank == 0) {
+            std::cerr << "Error: 'mesh' section not found in the YAML file."
+                      << std::endl;
+        }
+    }
+
+    auto res_file = "results_" + std::to_string(world_rank) + ".vtu";
+
+    if (world_rank == 0) {
+        std::cout << "Mesh File: " << mesh_file << std::endl;
+        std::cout << "Output File: " << res_file << std::endl;
+    }
+    // use_meshio(mesh_file, "results_" + std::to_string(world_rank) + ".vtu");
+    try {
+        std::cout << "Ramzi0" << std::endl;
+        pybind11::scoped_interpreter guard{};  // Start the Python interpreter
+
+        // Import the meshio library
+        std::cout << "Ramzi1" << std::endl;
+        pybind11::module meshio = pybind11::module::import("meshio");
+
+        // Read the mesh file
+        std::cout << "Ramzi2" << std::endl;
+        pybind11::object mesh = meshio.attr("read")(mesh_file);
+
+        // Write the mesh to a new file
+        std::cout << "Ramzi3" << std::endl;
+        meshio.attr("write")(res_file, mesh);
+
+        std::cout << "Ramzi4" << std::endl;
+        std::cout << "Mesh successfully read from " << input_file
+                  << " and written to " << res_file << std::endl;
+    } catch (const pybind11::error_already_set& e) {
+        std::cerr << "Python error: " << e.what() << std::endl;
     }
 
     // Finalize the Kokkos runtime

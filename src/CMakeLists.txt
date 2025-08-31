@@ -1,5 +1,5 @@
-# Add the subdirectory for the header-only library
 add_subdirectory(eos)
+add_subdirectory(io)
 
 # Add the executable
 add_executable(SPHiros sphiros.cpp)
@@ -17,4 +17,4 @@ endif()
 message(STATUS "yaml-cpp library type check passed.")
 
 # Link the required libraries
-target_link_libraries(SPHiros PUBLIC EOS MPI::MPI_CXX Kokkos::kokkos yaml-cpp::yaml-cpp CLI11::CLI11)
+target_link_libraries(SPHiros PUBLIC EOS IO MPI::MPI_CXX Kokkos::kokkos yaml-cpp::yaml-cpp CLI11::CLI11 pybind11::embed Python3::Python)

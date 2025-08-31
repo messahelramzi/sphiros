@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 project(SPHiros LANGUAGES CXX)
 
 enable_testing()
@@ -19,6 +19,8 @@ find_package(yaml-cpp REQUIRED)
 find_package(CLI11 REQUIRED)
 find_package(GTest REQUIRED)
 find_package(Doxygen REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 REQUIRED)
 
 get_target_property(LIBRARY_TYPE yaml-cpp::yaml-cpp TYPE)
 

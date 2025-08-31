@@ -10,15 +10,15 @@
                 "CMAKE_CXX_STANDARD": "20",
                 "CMAKE_CXX_COMPILER": "mpicxx",
                 "CMAKE_CXX_EXTENSIONS": "OFF",
-                "CMAKE_PREFIX_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/",
+                "CMAKE_PREFIX_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view/",
                 "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
                 "CMAKE_INSTALL_RPATH_USE_LINK_PATH": "ON"
             },
             "environment": {
-                "SPACK_ENV_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view",
-                "CUDA_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view",
-                "PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/bin:$penv{PATH}",
-                "LD_LIBRARY_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/lib/hpctoolkit:/home/rawg/apps/spack/var/spack/environments/sphiros-openmp/.spack-env/view/lib"
+                "SPACK_ENV_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view",
+                "CUDA_ROOT": "/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view",
+                "PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view/bin:$penv{PATH}",
+                "LD_LIBRARY_PATH": "/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view/lib/hpctoolkit:/home/rawg/apps/spack/var/spack/environments/sphiros/.spack-env/view/lib"
             }
         },
         {

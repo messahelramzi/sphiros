@@ -1,4 +1,4 @@
-mesh: "mesh.vtk"
+mesh: "sphere"
 eos:
   - type: ["EOSIdealGas", "EOSIdealGas"]
     eos_id: [0, 1]
