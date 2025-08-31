@@ -19,95 +19,145 @@
 \DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00023}00023\ \textcolor{comment}{//\ eos\ includes\ (test-\/only)}}
 \DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00024}00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{eos__linear__gas_8hpp}{eos\_linear\_gas.hpp}}"{}}}
 \DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00025}00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{eos__stiffened__gas_8hpp}{eos\_stiffened\_gas.hpp}}"{}}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00026}00026\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00037}\mbox{\hyperlink{sphiros_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{00037}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sphiros_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}**\ argv)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ MPI\ runtime}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00039}00039\ \ \ \ \ MPI\_Init(\&argc,\ \&argv);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ Kokkos\ runtime}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00041}00041\ \ \ \ \ Kokkos::initialize(argc,\ argv);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00042}00042\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{int}\ world\_size;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00044}00044\ \ \ \ \ MPI\_Comm\_size(MPI\_COMM\_WORLD,\ \&world\_size);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{int}\ world\_rank;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00046}00046\ \ \ \ \ MPI\_Comm\_rank(MPI\_COMM\_WORLD,\ \&world\_rank);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00048}00048\ \ \ \ \ CLI::App\ app\{\textcolor{stringliteral}{"{}SPHiros\ Command-\/Line\ Parser"{}}\};}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00049}00049\ \ \ \ \ std::string\ input\_file;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00050}00050\ \ \ \ \ app.add\_option(\textcolor{stringliteral}{"{}-\/i,-\/-\/input"{}},\ input\_file,\ \textcolor{stringliteral}{"{}Input\ YAML\ file"{}})-\/>required();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00051}00051\ \ \ \ \ std::string\ output\_file;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00052}00052\ \ \ \ \ app.add\_option(\textcolor{stringliteral}{"{}-\/o,-\/-\/output"{}},\ output\_file,\ \textcolor{stringliteral}{"{}Output\ file"{}});}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00054}00054\ \ \ \ \ app.add\_flag(\textcolor{stringliteral}{"{}-\/v,-\/-\/verbose"{}},\ verbose,\ \textcolor{stringliteral}{"{}Enable\ verbose\ output"{}});}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00055}00055\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{comment}{//\ Parse\ command-\/line\ arguments}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ app.parse(argc,\ argv);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00059}00059\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ CLI::ParseError\&\ e)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ Kokkos\ runtime}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ Kokkos::finalize();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ MPI\_Finalize();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ app.exit(e);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00064}00064\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00065}00065\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{if}\ (world\_rank\ ==\ 0)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ parsed\ values}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Input\ File:\ "{}}\ <<\ input\_file\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Output\ File:\ "{}}\ <<\ output\_file\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Verbose:\ "{}}\ <<\ (verbose\ ?\ \textcolor{stringliteral}{"{}Enabled"{}}\ :\ \textcolor{stringliteral}{"{}Disabled"{}})}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00072}00072\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00073}00073\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00074}00074\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ container\ of\ std::variant\ to\ hold\ EOSLinearGas\ and}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ EOSStiffenedGas}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }EOSVariant\ =\ std::variant<EOSLinearGas,\ EOSStiffenedGas>;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ std::vector<EOSVariant>\ eos\_vector;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00079}00079\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ EOSLinearGas\ and\ EOSStiffenedGas\ instances\ to\ the\ container}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00081}00081\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(0,\ 1.4,\ 1e-\/6));}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSStiffenedGas}{EOSStiffenedGas}}(1,\ 1.4,\ 1e-\/6,\ 0.0));}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(2,\ 1.4,\ 1e-\/6));}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(3,\ 1.4,\ 1e-\/6));}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00085}00085\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ Kokkos\ views}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ rho(\textcolor{stringliteral}{"{}rho"{}},\ 10);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ eint(\textcolor{stringliteral}{"{}eint"{}},\ 10);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ p(\textcolor{stringliteral}{"{}p"{}},\ 10);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ sos(\textcolor{stringliteral}{"{}sos"{}},\ 10);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00091}00091\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ data\ from\ host\ to\ device}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(rho,\ 1.0);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(eint,\ 1.0);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00095}00095\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Call\ PressureSoS\ for\ each\ EOS\ object\ using\ std::visit}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ eos\ :\ eos\_vector)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ std::visit(}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ obj)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ type\_name\ =\ \textcolor{keyword}{typeid}(obj).name();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\_name.length()\ >\ 20)\ \{}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\_name\ =\ type\_name.substr(0,\ 20)\ +\ \textcolor{stringliteral}{"{}..."{}};}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}EOS\ Type:\ "{}}\ <<\ type\_name\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj.PressureSoSImpl(rho,\ eint,\ p,\ sos);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ host\_p\ \ \ =\ Kokkos::create\_mirror\_view(p);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ host\_sos\ =\ Kokkos::create\_mirror\_view(p);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00108}00108\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(host\_p,\ p);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(host\_sos,\ sos);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00111}00111\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}p:\ "{}}\ <<\ host\_p(0)\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}sos:\ "{}}\ <<\ host\_sos(0)\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ eos);}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00117}00117\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00118}00118\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ Kokkos\ runtime}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00120}00120\ \ \ \ \ Kokkos::finalize();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ MPI\ runtime}}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00122}00122\ \ \ \ \ MPI\_Finalize();}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00123}00123\ }
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00124}00124\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
-\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00125}00125\ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00026}00026\ \textcolor{comment}{//\ io\ includes\ (test-\/only)}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00027}00027\ \textcolor{preprocessor}{\#include\ "{}pymeshio\_wrapper.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00039}\mbox{\hyperlink{sphiros_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{00039}}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{sphiros_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}**\ argv)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ MPI\ runtime}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00041}00041\ \ \ \ \ MPI\_Init(\&argc,\ \&argv);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ Kokkos\ runtime}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00043}00043\ \ \ \ \ Kokkos::initialize(argc,\ argv);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordtype}{int}\ world\_size;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00046}00046\ \ \ \ \ MPI\_Comm\_size(MPI\_COMM\_WORLD,\ \&world\_size);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordtype}{int}\ world\_rank;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00048}00048\ \ \ \ \ MPI\_Comm\_rank(MPI\_COMM\_WORLD,\ \&world\_rank);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00050}00050\ \ \ \ \ CLI::App\ app\{\textcolor{stringliteral}{"{}SPHiros\ Command-\/Line\ Parser"{}}\};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00051}00051\ \ \ \ \ std::string\ input\_file;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00052}00052\ \ \ \ \ app.add\_option(\textcolor{stringliteral}{"{}-\/i,-\/-\/input"{}},\ input\_file,\ \textcolor{stringliteral}{"{}Input\ YAML\ file"{}})-\/>required();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00053}00053\ \ \ \ \ std::string\ output\_file;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00054}00054\ \ \ \ \ app.add\_option(\textcolor{stringliteral}{"{}-\/o,-\/-\/output"{}},\ output\_file,\ \textcolor{stringliteral}{"{}Output\ file"{}});}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00056}00056\ \ \ \ \ app.add\_flag(\textcolor{stringliteral}{"{}-\/v,-\/-\/verbose"{}},\ verbose,\ \textcolor{stringliteral}{"{}Enable\ verbose\ output"{}});}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{comment}{//\ Parse\ command-\/line\ arguments}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ app.parse(argc,\ argv);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00061}00061\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ CLI::ParseError\&\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ Kokkos\ runtime}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ Kokkos::finalize();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00064}00064\ \ \ \ \ \ \ \ \ MPI\_Finalize();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ app.exit(e);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{if}\ (world\_rank\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Display\ parsed\ values}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Input\ File:\ "{}}\ <<\ input\_file\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Output\ File:\ "{}}\ <<\ output\_file\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Verbose:\ "{}}\ <<\ (verbose\ ?\ \textcolor{stringliteral}{"{}Enabled"{}}\ :\ \textcolor{stringliteral}{"{}Disabled"{}})}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00074}00074\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ container\ of\ std::variant\ to\ hold\ EOSLinearGas\ and}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ EOSStiffenedGas}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }EOSVariant\ =\ std::variant<EOSLinearGas,\ EOSStiffenedGas>;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ std::vector<EOSVariant>\ eos\_vector;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ EOSLinearGas\ and\ EOSStiffenedGas\ instances\ to\ the\ container}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(0,\ 1.4,\ 1e-\/6));}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSStiffenedGas}{EOSStiffenedGas}}(1,\ 1.4,\ 1e-\/6,\ 0.0));}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(2,\ 1.4,\ 1e-\/6));}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ eos\_vector.emplace\_back(\mbox{\hyperlink{classEOSLinearGas}{EOSLinearGas}}(3,\ 1.4,\ 1e-\/6));}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example\ Kokkos\ views}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ rho(\textcolor{stringliteral}{"{}rho"{}},\ 10);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ eint(\textcolor{stringliteral}{"{}eint"{}},\ 10);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ p(\textcolor{stringliteral}{"{}p"{}},\ 10);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00092}00092\ \ \ \ \ \ \ \ \ Kokkos::View<double*>\ sos(\textcolor{stringliteral}{"{}sos"{}},\ 10);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Copy\ data\ from\ host\ to\ device}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(rho,\ 1.0);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(eint,\ 1.0);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Call\ PressureSoS\ for\ each\ EOS\ object\ using\ std::visit}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ eos\ :\ eos\_vector)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ std::visit(}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ obj)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ type\_name\ =\ \textcolor{keyword}{typeid}(obj).name();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (type\_name.length()\ >\ 20)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ type\_name\ =\ type\_name.substr(0,\ 20)\ +\ \textcolor{stringliteral}{"{}..."{}};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}EOS\ Type:\ "{}}\ <<\ type\_name\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj.PressureSoSImpl(rho,\ eint,\ p,\ sos);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ host\_p\ \ \ =\ Kokkos::create\_mirror\_view(p);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ host\_sos\ =\ Kokkos::create\_mirror\_view(p);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(host\_p,\ p);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Kokkos::deep\_copy(host\_sos,\ sos);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}p:\ "{}}\ <<\ host\_p(0)\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}sos:\ "{}}\ <<\ host\_sos(0)\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \},}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ eos);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00119}00119\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00121}00121\ \ \ \ \ \textcolor{comment}{//\ Read\ the\ mesh\ using\ meshio\ (if\ specified)}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00122}00122\ \ \ \ \ std::filesystem::path\ yaml\_path(input\_file);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00123}00123\ \ \ \ \ std::string\ yaml\_folder\ =\ yaml\_path.parent\_path().string();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00125}00125\ \ \ \ \ YAML::Node\ config\ =\ YAML::LoadFile(input\_file);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00127}00127\ \ \ \ \ std::string\ mesh\_file\ =\ yaml\_folder\ +\ \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (config[\textcolor{stringliteral}{"{}mesh"{}}])\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ mesh\_prefix\ =\ config[\textcolor{stringliteral}{"{}mesh"{}}].as<std::string>();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ mesh\_file\ +=\ mesh\_prefix\ +\ \textcolor{stringliteral}{"{}/"{}}\ +\ mesh\_prefix\ +\ \textcolor{stringliteral}{"{}\_"{}}\ +}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(world\_rank)\ +\ \textcolor{stringliteral}{"{}.vtu"{}};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00132}00132\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (world\_rank\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Error:\ 'mesh'\ section\ not\ found\ in\ the\ YAML\ file."{}}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00139}00139\ \ \ \ \ \textcolor{keyword}{auto}\ res\_file\ =\ \textcolor{stringliteral}{"{}results\_"{}}\ +\ std::to\_string(world\_rank)\ +\ \textcolor{stringliteral}{"{}.vtu"{}};}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00141}00141\ \ \ \ \ \textcolor{keywordflow}{if}\ (world\_rank\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Mesh\ File:\ "{}}\ <<\ mesh\_file\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00143}00143\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Output\ File:\ "{}}\ <<\ res\_file\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00144}00144\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00145}00145\ \ \ \ \ \textcolor{comment}{//\ use\_meshio(mesh\_file,\ "{}results\_"{}\ +\ std::to\_string(world\_rank)\ +\ "{}.vtu"{});}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00146}00146\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Ramzi0"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ pybind11::scoped\_interpreter\ guard\{\};\ \ \textcolor{comment}{//\ Start\ the\ Python\ interpreter}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Import\ the\ meshio\ library}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Ramzi1"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ pybind11::module\ meshio\ =\ pybind11::module::import(\textcolor{stringliteral}{"{}meshio"{}});}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ the\ mesh\ file}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Ramzi2"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ pybind11::object\ mesh\ =\ meshio.attr(\textcolor{stringliteral}{"{}read"{}})(mesh\_file);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ the\ mesh\ to\ a\ new\ file}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Ramzi3"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ meshio.attr(\textcolor{stringliteral}{"{}write"{}})(res\_file,\ mesh);}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Ramzi4"{}}\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00163}00163\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Mesh\ successfully\ read\ from\ "{}}\ <<\ input\_file}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ and\ written\ to\ "{}}\ <<\ res\_file\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00165}00165\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ pybind11::error\_already\_set\&\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00166}00166\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Python\ error:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00167}00167\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00169}00169\ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ Kokkos\ runtime}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00170}00170\ \ \ \ \ Kokkos::finalize();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00171}00171\ \ \ \ \ \textcolor{comment}{//\ Finalize\ the\ MPI\ runtime}}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00172}00172\ \ \ \ \ MPI\_Finalize();}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00174}00174\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{sphiros_8cpp_source_l00175}00175\ \}}
 
 \end{DoxyCode}
